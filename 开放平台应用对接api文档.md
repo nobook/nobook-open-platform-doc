@@ -54,7 +54,11 @@ msg | String| 是| 状态信息|
 
 #### 接口说明
 主要是为第三方用户对接使用
-
+用户登录兑吧积分商城，需要开发者根据用户信息在服务端生成一个免登录url，通过这个url链接，兑吧才能知道是哪个用户来访问积分商城，并通过credits参数获取用户的积分余额。
+为了确保客户端每次请求到都是最新的免登陆url，客户端每次向服务器发的请求不能是固定的，以避免请求被缓存。
+兑吧免登录url经过签名，该url地址5分钟失效，请务必在生成地址后立即使用，使用后页面会重定向进入积分商城，登录状态24小时有效。
+同理
+开发者服务器端需要开发一个支持重定向的接口实现动态生成免登录url地址，该接口地址配置在客户端，用户通过点击该地址访问应用。
 
 功能说明：
 
@@ -68,11 +72,11 @@ msg | String| 是| 状态信息|
 
 #### 请求说明
 
-请求方式：post
+请求方式：get
 
 编码说明：UTF-8
 
-请求URL：https://{appname}-lab.nobook.com//withoutpwd/autologin?openapp_id=123&uid=456&temp=1501112321390&code=fdasfdDS93ASF8&dockurl=www.baidu.com&pid=1&scope=
+请求URL：https://{appname}-lab.nobook.com/withoutpwd/autologin?openapp_id=123&uid=456&temp=1501112321390&code=fdasfdDS93ASF8&dockurl=www.baidu.com&pid=1&scope=
 1,2,3&jsoncallback=?
 
 接口联系人电话：15101064033 
@@ -87,14 +91,28 @@ msg | String| 是| 状态信息|
 openapp_id  | int  | 是     |应用ID     | 
 uid         |  int | 是     | 第三方用户ID| 
 temp        |string| 是     | 时间戳    | 
-code        |string| 是     | 加密方式  | ksort（appid,appkey,temp,uid）md5加密
+code        |string| 是     | 加密方式  | 
 dockurl     |string| 是     | 对接URL   | 第三方url
 pid         |int   | 是     | Vip产品id | 
 scope       |string| 否     | 多产品id串| 
 jsoncallback|string| 否     |回调地址   |   
 2）请求示例
+#### 对接说明
+应用方提供接口
+示例：http://6Z27v-lab.nobook.cc/withoutpwd/autologin
 
+开放平台-->应用管理-->用户系统对接-->免密登录
+或者控制面板中
+#####  appid：
+    申请应用时分配的app_id。
+##### appkey:
+    申请应用时分配的app_key.
+参数code说明
+需要把app_id app_key temp uid做排序 然后MD5加密
 #### 响应说明
+失败
+{code: 500, data: "", msg: "错误信息"}
+成功
     无返回值，免密登录成功直接进入应用
 
 
