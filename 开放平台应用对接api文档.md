@@ -76,8 +76,7 @@ msg | String| 是| 状态信息|
 
 编码说明：UTF-8
 
-请求URL：https://{appname}-lab.nobook.com/withoutpwd/autologin?openapp_id=123&uid=456&temp=1501112321390&code=fdasfdDS93ASF8&dockurl=www.baidu.com&pid=1&scope=
-1,2,3&jsoncallback=?
+请求URL：https://{appname}-lab.nobook.com/withoutpwd/autologin?appid=123&uid=456&temp=1501112321390&code=fdasfdDS93ASF8&return_url=www.baidu.com&jsoncallback=?
 
 接口联系人电话：15101064033 
 
@@ -88,14 +87,12 @@ msg | String| 是| 状态信息|
 
 参数        | 类型 |是否必须| 描述      | 备注
 ------------|------|--------|-----------|---
-openapp_id  | int  | 是     |应用ID     | 
+appid  | int  | 是     |应用ID     | 
 uid         |  int | 是     | 第三方用户ID| 
 temp        |string| 是     | 时间戳    | 
 code        |string| 是     | 加密方式  | 
-dockurl     |string| 是     | 对接URL   | 第三方url
-pid         |int   | 是     | Vip产品id | 
-scope       |string| 否     | 多产品id串| 
-jsoncallback|string| 否     |回调地址   |   
+return_url     |string| 否     | 应用登录成功第三方回调地址  | 第三方url
+jsoncallback|string| 否     |   |   
 2）请求示例
 #### 对接说明
 应用方提供接口
@@ -104,16 +101,20 @@ jsoncallback|string| 否     |回调地址   |
 开放平台-->应用管理-->用户系统对接-->免密登录
 或者控制面板中
 #####  appid：
-    申请应用时分配的app_id。
+    申请应用时分配的appid。
 ##### appkey:
-    申请应用时分配的app_key.
+    申请应用时分配的appkey.
 参数code说明
-需要把app_id app_key temp uid做排序 然后MD5加密
+需要把appid appkey temp uid做排序 然后MD5加密
 #### 响应说明
 失败
 {code: 500, data: "", msg: "错误信息"}
 成功
-    无返回值，免密登录成功直接进入应用
+    无返回值，
+免密登录成功
+如果有回调地址跳到回调地址
+return redirect($return_url);
+如果没有回调地址直接进入应用首页
 
 
 ### OAuth2.0协议登录
