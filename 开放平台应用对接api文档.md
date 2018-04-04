@@ -69,9 +69,10 @@ NOBOOK会提供对接相应信息。
 return redirect($return_url);
 如果没有回调地址直接进入应用首页
 
-#### 代码示例
+#### 代码示例(nodejs)
 
 ```nodejs
+const md5 = require('md5');
 // 应用程序名称
 const APP_NAME = 'appname';
 // 应用程序key
