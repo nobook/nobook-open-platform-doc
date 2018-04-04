@@ -36,7 +36,7 @@ NOBOOK虚拟实验免登录url经过签名，该url地址1分钟失效，请务�
 
 编码说明：UTF-8
 
-请求URL：https://{appname}-lab.nobook.com/withoutpwd/autologin?appid=123&uid=456&temp=1501112321390&code=fdasfdDS93ASF8&return_url=www.baidu.com&jsoncallback=?
+请求URL：https://{appname}-lab.nobook.com/withoutpwd/autologin?appid=123&uid=456&temp=1501112321&code=fdasfdDS93ASF8&return_url=www.baidu.com&jsoncallback=?
 
 
 #### 请求参数说明
@@ -46,7 +46,7 @@ NOBOOK虚拟实验免登录url经过签名，该url地址1分钟失效，请务�
 ------------|------|--------|-----------|---
 appid  | int  | 是     |应用ID     | 
 uid         |  int | 是     | 第三方用户ID| 
-temp        |string| 是     | 时间戳    | 
+temp        |string| 是     | 时间戳（以秒为单位）    | 
 code        |string| 是     | 加密方式  | 
 return_url     |string| 否     | 应用登录成功第三方回调地址  | 第三方url
 jsoncallback|string| 否     |   |   
@@ -69,6 +69,26 @@ NOBOOK会提供对接相应信息。
 return redirect($return_url);
 如果没有回调地址直接进入应用首页
 
+#### 代码示例
+
+```nodejs
+// 应用程序名称
+const APP_NAME = 'appname';
+// 应用程序key
+const APP_KEY = 'sd893sdg3iudsj30sds';
+// 应用程序ID
+const APP_ID = '999999';
+// 第三方用户ID(仅能是数字)
+const UID = 111111;
+
+// 当前时间戳
+const TEMP = parseInt(new Date().getTime() / 1000);
+// 计算CODE
+const CODE = md5(`${APP_ID}${APP_KEY}${TEMP}${UID}`);
+
+const URL = `https://${APP_NAME}-lab.nobook.com/withoutpwd/autologin?appid=${APP_ID}&uid=${UID}&temp=${TEMP}&code=${CODE}`;
+console.log(URL);
+```
 
 ### OAuth2.0协议登录
 #### OAuth2.0概述
