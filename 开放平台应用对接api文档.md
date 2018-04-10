@@ -87,7 +87,14 @@ const TEMP = parseInt(new Date().getTime() / 1000);
 // 计算CODE
 const CODE = md5(`${APP_ID}${APP_KEY}${TEMP}${UID}`);
 
-const URL = `https://${APP_NAME}-lab.nobook.com/withoutpwd/autologin?appid=${APP_ID}&uid=${UID}&temp=${TEMP}&code=${CODE}`;
+let URL = `https://${APP_NAME}-lab.nobook.com/withoutpwd/autologin?appid=${APP_ID}&uid=${UID}&temp=${TEMP}&code=${CODE}`;
+
+// 如果需要可以指定跳转的链接
+let returnURL = 'https://huaxue.nobook.com/';
+if (returnURL) {
+	URL += `&return_url=${returnURL}`;
+}
+
 console.log(URL);
 ```
 
