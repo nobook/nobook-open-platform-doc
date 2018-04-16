@@ -30,6 +30,7 @@
 | 参数        | 是否必须   |  参数类型  | 限制长度 |参数说明|
 | --------    | :-----     | :----     | :----   | :----|
 | uid    | 必须     | str     | 32   | 用户唯一性标识，对应唯一一个用户且不可变|
+| subject    | 必须     | str     | 32   | 学科标识（phy：物理；chem：化学；biocz：初中生物；biogz：高中生物；sci：小学科学）|
 | appid |必须 | str|  16   | 接口appid，应用的唯一标识|
 | timestamp|必须| str|255   |1970-01-01开始的时间戳，秒为单位|
 | redirect |必须 | str|  255  | 登录成功后的重定向地址,必须进行URL编码|
@@ -48,13 +49,13 @@ uid：1
 appid：123456 
 timestamp:1523865261
 appkey:testappkey
+subject:phy
 redirect:https%3a%2f%2fwww.nobook.com%2f
 
 
 2. 参数进行升序排列后生成的签名原串：
-123456testappkeyhttps%3a%2f%2fwww.nobook.com%2f15238652611
-
-3. 签名后字符串 : 768f8d587d6c605d7a8c1f7b0641e349
+123456testappkeyhttps%3a%2f%2fwww.nobook.com%2fphy15238652611
+3. 签名后字符串 : d9adc82b45df90d95df293004ad130b4
 
 4. 签名url ：https://school.nobook.com/api/login/autologin?appid=123456&uid=1&temp=1523865261&sign=768f8d587d6c605d7a8c1f7b0641e349&redirect=https%3a%2f%2fwww.nobook.com%2f
 
@@ -100,7 +101,7 @@ redirect:https%3a%2f%2fwww.nobook.com%2f
         "iconPath":"实验缩略图",
         "name": "实验名称",
         "url": "实验访问地址"
-    }
+    },
 ]    
     
 ```
