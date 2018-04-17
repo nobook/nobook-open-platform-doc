@@ -34,7 +34,8 @@
 | appid |必须 | str|  16   | 接口appid，应用的唯一标识|
 | timestamp|必须| str|255   |1970-01-01开始的时间戳，秒为单位|
 | redirect |必须 | str|  255  | 登录成功后的重定向地址,必须进行URL编码|
-| sign |必须 | str|  255   | MD5签名|
+| sign |必须 | str|  255   | MD5签名 (除redirect参数外将所有的参数值与appkey按参数名升序进行排列）
+|
 
 
 ### 2.2 签名生成规则
@@ -54,7 +55,7 @@ redirect:https%3a%2f%2fwww.nobook.com%2f
 
 
 2. 参数进行升序排列后生成的签名原串：
-123456testappkeyhttps%3a%2f%2fwww.nobook.com%2fphy15238652611
+123456testappkeyphy15238652611
 3. 签名后字符串 : d9adc82b45df90d95df293004ad130b4
 
 4. 签名url ：https://school.nobook.com/api/login/autologin?appid=123456&uid=1&temp=1523865261&sign=768f8d587d6c605d7a8c1f7b0641e349&redirect=https%3a%2f%2fwww.nobook.com%2f
