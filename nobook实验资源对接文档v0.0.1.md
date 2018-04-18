@@ -23,7 +23,7 @@
 ### 请求说明
 请求方式：get
 编码说明：UTF-8
-请求URL：https://school.nobook.com/api/login/autologin?appid=123&uid=456&temp=1501112321&sign=fdasfdDS93ASF8&redirect=https%3a%2f%2fwww.nobook.com%2f
+请求URL：https://school.nobook.com/api/login/autologin?appid=123&uid=456&timestamp=1501112321&sign=fdasfdDS93ASF8&redirect=https%3a%2f%2fwww.nobook.com%2f
 
 ### 2.1 参数说明
 
@@ -58,7 +58,7 @@ redirect:https%3a%2f%2fwww.nobook.com%2f
 123456testappkeyphy15238652611
 3. 签名后字符串 : d9adc82b45df90d95df293004ad130b4
 
-4. 签名url ：https://school.nobook.com/api/login/autologin?appid=123456&uid=1&temp=1523865261&sign=768f8d587d6c605d7a8c1f7b0641e349&redirect=https%3a%2f%2fwww.nobook.com%2f
+4. 签名url ：https://school.nobook.com/api/login/autologin?appid=123456&uid=1&timestamp=1523865261&sign=768f8d587d6c605d7a8c1f7b0641e349&redirect=https%3a%2f%2fwww.nobook.com%2f
 
 ---
 
@@ -76,7 +76,7 @@ redirect:https%3a%2f%2fwww.nobook.com%2f
 ### 请求说明
 请求方式：get
 编码说明：UTF-8
-请求URL：https://school.nobook.com/api/experiment/get?appid=123&subject=phy&temp=1501112321&sign=fdasfdDS93ASF8
+请求URL：https://school.nobook.com/api/experiment/get?appid=123&subject=phy&timestamp=1501112321&sign=fdasfdDS93ASF8
 
 ### 参数说明
 
