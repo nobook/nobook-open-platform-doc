@@ -21,8 +21,8 @@
 ## 2. 免登录URL生成
 
 ### 请求说明
-请求方式：get
-编码说明：UTF-8
+请求方式：get <br>
+编码说明：UTF-8 <br>
 请求URL：https://res-api.nobook.com/api/login/autologin?subject=phy&appid=123&uid=456&timestamp=1501112321&sign=fdasfdDS93ASF8&redirect=https%3a%2f%2fwww.nobook.com%2f
 
 ### 2.1 参数说明
@@ -74,8 +74,8 @@ appid appkey subject timestamp uid
 
 ------
 ### 请求说明
-请求方式：get
-编码说明：UTF-8
+请求方式：get <br>
+编码说明：UTF-8 <br>
 请求URL：https://res-api.nobook.com/api/experiment/get?appid=123&subject=phy&timestamp=1501112321&sign=fdasfdDS93ASF8
 
 ### 参数说明
