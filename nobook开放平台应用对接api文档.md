@@ -81,7 +81,7 @@ redirect:https://nobook.com <br>
 appid appkey subject timestamp uid
 3. 签名后字符串 : 520aed5635dca93d250b809a26840a98
 
-4. 签名url ：https://res-api.nobook.com/api/login/autologin?subject=phy&appid=appid&uid=uid&timestamp=timestamp&sign= 520aed5635dca93d250b809a26840a98&redirect=https%3a%2f%2fwww.nobook.com%2f
+4. 签名url ：https://{appname}-lab.nobook.com/api/login/autologin?subject=phy&appid=appid&uid=uid&timestamp=timestamp&sign= 520aed5635dca93d250b809a26840a98&redirect=https%3a%2f%2fwww.nobook.com%2f
 
 #### 响应说明
 失败
