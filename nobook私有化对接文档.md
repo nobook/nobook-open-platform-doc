@@ -35,7 +35,7 @@
 | scope     | 必须     | str     | 20    | 产品授权列表(注意：多个产品用英文逗号隔开),<br>如授权一个NB化学实验产品：<br>scope = 2,<br>如授权NB化学实验产品和NB物理实验产品：<br>scope = 1,2<br>产品：<br>1:NB物理实验 ,<br> 2:NB化学实验 , <br> 3:NB生物实验初中版 , <br> 4:NB生物高中版 , <br> 5:NB小学科学,<br>6:NB物理实验资源版初中版, <br>  7:NB物理实验资源版高中版,  <br> 8:NB化学实验资源版初中版,<br>9:NB化学实验资源版高中版|
 | return_url    | 非必须     | str     | 255    | 登录成功后的重定向地址，可以直达到任意页面<br>注意：如未设置return_url参数，则会根据return_pid参数进入相应的产品|
 | return_pid    | 非必须     | str     | 10   | 授权成功后跳转产品标识如跳转NB化学实验产品：return_pid=2 <br>注意：如已设置return_url参数则会优先跳转return_url所设置的跳转地址，否则根据产品标识进入相应的产品|
-| sign     | 必须     | str     | 255   | MD5签名 （appid realname scope tamp uid）|
+| sign     | 必须     | str     | 255   | MD5签名 md5（appid realname scope tamp uid）|
 
 
 
