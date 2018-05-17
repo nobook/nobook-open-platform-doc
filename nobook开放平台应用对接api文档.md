@@ -91,6 +91,67 @@ appid appkey subject timestamp uid
 如果有回调地址跳到回调地址
 return redirect($return_url);
 如果没有回调地址直接进入实验平台首页
+### 代码示例php
+```<?php
+
+//配置参数
+$appid = '';
+$appkey = '';
+$timestamp = time();
+$uid = '';
+$redirect = urlencode('https://{appname}nobook.com/go/1');
+
+
+function  sign($array)
+{
+    ksort($array);
+    $string="";
+    while (list($key, $val) = each($array)){
+        $string = $string . $val ;
+    }
+    return md5($string);
+}
+
+//获取登录Url
+function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey)
+{
+    $arr = [
+        'uid'=> $uid,
+        'appid'=> $appid,
+        'timestamp'=> $timestamp,
+        'appkey'=> $appkey,
+    ];
+    $sign = sign($arr);
+    $param = [
+        'timestamp'=> $timestamp,
+        'uid'=> $uid,
+        'appid'=> $appid,
+        'sign'=> $sign,
+        'redirect'=> 'https://res-api.nobook.com/wuli/?sourceid=452385a5699233a32bc4c6b292800752',
+    ];
+
+    $url = 'https://res-api.nobook.com/api/login/autologin?'.http_build_query($param);
+
+    return $url;
+
+
+}
+
+$getLoginUrl = getLoginUrl($uid, $subject, $appid, $timestamp, $appkey);
+
+?>
+
+
+<h4>实验列表URl</h4>
+
+
+<p> <a target="_blank" href="<?=$getListUrl?>"><?=$getListUrl?></a> </p>
+
+<h4>登录URl</h4>
+
+
+<p> <a target="_blank" href="<?=$getLoginUrl?>"><?=$getLoginUrl?></a> </p>
+```
 
 #### 代码示例(nodejs)
 
