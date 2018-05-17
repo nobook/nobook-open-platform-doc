@@ -81,7 +81,7 @@ redirect:https://nobook.com <br>
 appid appkey subject timestamp uid
 3. 签名后字符串 : 520aed5635dca93d250b809a26840a98
 
-4. 签名url ：https://{appname}-lab.nobook.com/api/login/autologin?subject=phy&appid=appid&uid=uid&timestamp=timestamp&sign= 520aed5635dca93d250b809a26840a98&redirect=https%3a%2f%2fwww.nobook.com%2f
+4. 签名url ：https://{appname}-lab.nobook.com/withoutpwd/autologin?subject=phy&appid=appid&uid=uid&timestamp=timestamp&sign= 520aed5635dca93d250b809a26840a98&redirect=https%3a%2f%2fwww.nobook.com%2f
 
 #### 响应说明
 失败
@@ -113,7 +113,7 @@ function  sign($array)
 }
 
 //获取登录Url
-function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey)
+function getLoginUrl($uid, $appid, $timestamp, $appkey)
 {
     $arr = [
         'uid'=> $uid,
@@ -127,10 +127,10 @@ function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey)
         'uid'=> $uid,
         'appid'=> $appid,
         'sign'=> $sign,
-        'redirect'=> 'https://res-api.nobook.com/wuli/?sourceid=452385a5699233a32bc4c6b292800752',
+        'redirect'=> 'https://{appname}nobook.com/go/1',
     ];
 
-    $url = 'https://res-api.nobook.com/api/login/autologin?'.http_build_query($param);
+    $url = 'https://{appname}nobook.com/withoutpwd/autologin?'.http_build_query($param);
 
     return $url;
 
@@ -141,16 +141,6 @@ $getLoginUrl = getLoginUrl($uid, $subject, $appid, $timestamp, $appkey);
 
 ?>
 
-
-<h4>实验列表URl</h4>
-
-
-<p> <a target="_blank" href="<?=$getListUrl?>"><?=$getListUrl?></a> </p>
-
-<h4>登录URl</h4>
-
-
-<p> <a target="_blank" href="<?=$getLoginUrl?>"><?=$getLoginUrl?></a> </p>
 ```
 
 #### 代码示例(nodejs)
