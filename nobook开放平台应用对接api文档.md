@@ -39,26 +39,50 @@ NOBOOK虚拟实验免登录url经过签名，该url地址1分钟失效，请务�
 
 
 #### 请求参数说明
+
 1）请求消息体
 
-参数        | 类型 |是否必须| 描述      | 备注
-------------|------|--------|-----------|---
-appid  | int  | 是     |应用ID     | 
-uid         |  int | 是     | 第三方用户ID| 
-temp        |string| 是     | 时间戳（以秒为单位）    | 
-code        |string| 是     | 加密方式  | 
-return_url     |string| 否     | 应用登录成功第三方回调地址  | 第三方url
-jsoncallback|string| 否     |   |   
+| 参数        | 是否必须   |  参数类型  | 限制长度 |参数说明|
+| --------    | :-----     | :----     | :----   | :----|
+| uid    | 必须     | str     | 32   | 用户唯一性标识，对应唯一一个用户且不可变|
+| appid |必须 | str|  16   | 接口appid，应用的唯一标识|
+| timestamp|必须| str|255   |1970-01-01开始的时间戳，秒为单位|
+| redirect |必须 | str|  255  | 登录成功后的重定向地址,必须进行URL编码|
+| sign |必须 | str|  255   | MD5签名 (除redirect参数外将所有的参数值与appkey按参数名升序进行排列）
+
+### redirect 跳转产品页面汇总
+
+| 页面       | 地址   |  说明 |
+| --------    | :-----     |  :-----     | 
+| 实验平台首页    | https://{appname}-lab.nobook.com     | 此为NOBOOK官方提供的实验平台入口|
+| 物理实验页面 | https://{appname}-lab.nobook.com/go/1 | 物理实验地址|
+| 化学实验页面 | https://{appname}-lab.nobook.com/go/5 | 化学实验地址|
+| 初中生物实验页面 | https://{appname}-lab.nobook.com/go/2 | 初中生物实验地址|
+| 高中生物实验页面 | https://{appname}-lab.nobook.com/go/3 | 高中生物实验地址|
+| 小学科学实验页面 | https://{appname}-lab.nobook.com/go/4 | 小学科学实验地址|
+
+
+### 1.1 签名生成规则
+md5签名的原理如下： 将所有的参数值与appkey按参数名升序进行排列。
+Md5(value1+value2+...appkey...+valueN)
+appkey在签名中的顺序取决于他在所有参数名中的顺序。
+
 2）请求示例
-#### 对接说明
-NOBOOK会提供对接相应信息。
-或者控制面板中
-#####  appid：
-    申请应用时分配的appid。
-##### appkey:
-    申请应用时分配的appkey.
-参数code说明
-需要把appid appkey temp uid做排序 然后MD5加密
+
+1. 参数：<br>
+uid：uid <br>
+appid：appid <br>
+timestamp:timestamp <br>
+appkey:appkey <br>
+redirect:https://nobook.com <br>
+
+
+2. 参数进行升序排列后生成的签名原串：
+appid appkey subject timestamp uid
+3. 签名后字符串 : 520aed5635dca93d250b809a26840a98
+
+4. 签名url ：https://res-api.nobook.com/api/login/autologin?subject=phy&appid=appid&uid=uid&timestamp=timestamp&sign= 520aed5635dca93d250b809a26840a98&redirect=https%3a%2f%2fwww.nobook.com%2f
+
 #### 响应说明
 失败
 {code: 500, data: "", msg: "错误信息"}
@@ -66,7 +90,7 @@ NOBOOK会提供对接相应信息。
 免密登录成功
 如果有回调地址跳到回调地址
 return redirect($return_url);
-如果没有回调地址直接进入应用首页
+如果没有回调地址直接进入实验平台首页
 
 #### 代码示例(nodejs)
 
