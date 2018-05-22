@@ -37,6 +37,19 @@
 | sign     | 必须     | str     | 255   | MD5签名 md5（appid appkey realname scope tamp uid）|
 
 
+### return_url 跳转产品页面汇总
+
+| 页面       | 地址   |  说明 |
+| --------    | :-----     |  :-----     | 
+| 实验平台首页    | http://ip     | 首页|
+| 物理实验页面 | http://ip/wuli | 物理实验地址|
+| 化学实验页面 | http://ip/huaxue | 化学实验地址|
+| 初中生物实验页面 | http://ip/shengwu | 初中生物实验地址|
+| 高中生物实验页面 | http://ip/shengwu/gz | 高中生物实验地址|
+| 小学科学实验页面 | http://ip/xiaoke | 小学科学实验地址|
+
+
+
 
 
 
