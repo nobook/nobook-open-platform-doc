@@ -49,7 +49,60 @@
 | 小学科学实验页面 | http://ip/xiaoke | 小学科学实验地址|
 
 
+### 代码示例php
+```<?php
 
+//配置参数
+$appid = '';
+$appkey = '';
+$tamp = time();
+$realname = 'xx';
+$uid = '';
+$redirect = urlencode('https://{appname}-lab.nobook.com/go/1');
+
+
+function  sign($array)
+{
+    ksort($array);
+    $string="";
+    foreach($array as $key=>$val){
+        $string = $string . $val ;
+    }
+    return md5($string);
+}
+
+//获取登录Url
+function getLoginUrl( $appid,$uid,$realname,$scope, $tamp, $appkey)
+{
+    $arr = [
+       'appid'=>$appid,
+        'uid'=> $uid,
+        'realname' => $realname,
+        'scope'=> $scope,
+        'tamp'=> $tamp,
+        'appkey'=> $appkey,
+    ];
+    $sign = sign($arr);
+    $param = [
+        'tamp'=> $temp,
+        'uid'=> $uid,
+        'appid'=> $appid,
+        'code'=> $sign,
+        'redirect'=> 'http://ip',
+    ];
+
+    $url = 'http://xxx.com/login/autologin/withoutpwd/autologin?'.http_build_query($param);
+
+    return $url;
+
+
+}
+
+$getLoginUrl = getLoginUrl($uid, $appid, $temp, $appkey);
+
+?>
+
+```
 
 
 
