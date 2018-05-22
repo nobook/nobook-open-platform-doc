@@ -20,7 +20,7 @@
 ### 请求说明
 请求方式：get<br>
 编码说明：UTF-8 <br>
-请求URL：http://xxx.com/login/autologin?uid=111&realname=xxx&appid=appid&tamp=1526542472&scope=1%2C2&sign=c09f38e459b1fb065cd94e7067ce2fc6&return_url=1
+请求URL：http://xxx.com/login/autologin?uid=111&realname=xxx&appid=appid&tamp=1526542472&scope=1%2C2&sign=c09f38e459b1fb065cd94e7067ce2fc6&return_url=产品地址
 
 
 ### 2.1 参数说明
