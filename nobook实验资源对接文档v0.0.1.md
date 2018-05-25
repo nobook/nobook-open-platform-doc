@@ -199,7 +199,42 @@ $getLoginUrl = getLoginUrl($uid, $subject, $appid, $timestamp, $appkey);
 <p> <a target="_blank" href="<?=$getLoginUrl?>"><?=$getLoginUrl?></a> </p>
 ```
 
+### 4. nodejs demo
 
+```
+const express = require('express');
+const app = express();
+const md5 = require('md5');
+
+const appid = '21412';
+const appkey = 'cf3105d92c67d288';
+
+// 获取实验列表
+app.get('/list', (req, res)=> {
+    const url = 'https://res-api.nobook.com/api/experiment/get';
+    const subject = 'chem';
+    const timestamp = Math.round(new Date().getTime() / 1000);
+    const sign = md5(`${appid}${appkey}${subject}${timestamp}`);
+    const redirectURL = `${url}?appid=${appid}&subject=${subject}&timestamp=${timestamp}&sign=${sign}`;
+    res.redirect(redirectURL);
+});
+
+// 跳转到某一个具体的实验 
+app.get('/demo', (req, res)=> {
+    const redirect = encodeURIComponent('http://res-api.nobook.com/wuli/?sourceid=98b7908cdb19fcadfe77a380b4769c63');
+    const subject = 'phy';
+    const timestamp = Math.round(new Date().getTime() / 1000);
+    const uid = '10000';
+    const sign = md5(`${appid}${appkey}${subject}${timestamp}${uid}`);
+    res.redirect(`https://res-api.nobook.com/api/login/autologin?appid=${appid}&subject=${subject}&timestamp=${timestamp}&sign=${sign}&redirect=${redirect}`);
+});
+
+app.listen(8080);
+
+```
+
+### 5. 视频demo
+![](https://downloadcdn.oss-cn-qingdao.aliyuncs.com/video/NOBOOK_VIDEO/without_password_demo.mp4)
 
 
 
