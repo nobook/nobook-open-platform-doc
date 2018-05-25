@@ -235,6 +235,7 @@ app.listen(8080);
 
 ### 5. 视频demo
 ![](https://downloadcdn.oss-cn-qingdao.aliyuncs.com/video/NOBOOK_VIDEO/without_password_demo.mp4)
-
+demo 下载地址
+https://downloadcdn.oss-cn-qingdao.aliyuncs.com/video/NOBOOK_VIDEO/without_password_demo.mp4
 
 
