@@ -30,7 +30,6 @@
 | uid    | 必须     | str     | 11   | 用户唯一性标识，对应唯一一个用户且不可变|
 | realname     | 必须     | str     | 30   | 用户昵称|
 | appid     | 必须     | str     | 255   | 应用的唯一标识|
-| appkey     | 必须     | str     | 255   | 应用密匙|
 | tamp     | 必须     | str     | 255    | 1970-01-01开始的时间戳，秒为单位。|
 | scope     | 必须     | str     | 20    | 产品授权列表(注意：多个产品用英文逗号隔开),<br>如授权一个NB化学实验产品：<br>scope = 2,<br>如授权NB化学实验产品和NB物理实验产品：<br>scope = 1,2<br>产品：<br>1:NB物理实验 ,<br> 2:NB化学实验 , <br> 3:NB生物实验初中版 , <br> 4:NB生物高中版 , <br> 5:NB小学科学,<br>6:NB物理实验资源版初中版, <br>  7:NB物理实验资源版高中版,  <br> 8:NB化学实验资源版初中版,<br>9:NB化学实验资源版高中版|
 | return_url    | 非必须     | str     | 255    | 登录成功后的重定向地址，可以直达到任意页面<br>注意：如未设置return_url参数，则会根据return_pid参数进入相应的产品|
@@ -50,55 +49,42 @@
 
 
 ### 代码示例php
-```<?php
+```
+<?php
 
 //配置参数
-$appid = '';
+$uid='';
+$appid='';
 $appkey = '';
 $tamp = time();
-$realname = 'xx';
-$uid = '';
-$redirect = urlencode('https://{appname}-lab.nobook.com/go/1');
+$realname='';
+$scope = '';
+$sign = md5($appid.$appkey. $realname.$scope.$tamp.$uid);
+$return_url='/';
 
-
-function  sign($array)
-{
-    ksort($array);
-    $string="";
-    foreach($array as $key=>$val){
-        $string = $string . $val ;
-    }
-    return md5($string);
-}
 
 //获取登录Url
-function getLoginUrl( $appid,$uid,$realname,$scope, $tamp, $appkey)
+function getLoginUrl($tamp, $uid, $realname, $appid, $scope, $sign, $return_url)
 {
-    $arr = [
-       'appid'=>$appid,
-        'uid'=> $uid,
-        'realname' => $realname,
-        'scope'=> $scope,
+    $param =  array(
         'tamp'=> $tamp,
-        'appkey'=> $appkey,
-    ];
-    $sign = sign($arr);
-    $param = [
-        'tamp'=> $temp,
-        'uid'=> $uid,
+        'uid'=>$uid,
+        'realname'=>$realname,
         'appid'=> $appid,
-        'code'=> $sign,
-        'redirect'=> 'http://ip',
-    ];
+        'scope'=> $scope,
+        'sign'=> $sign,
+        'return_url'=> $return_url,
+    );
 
-    $url = 'http://xxx.com/login/autologin/withoutpwd/autologin?'.http_build_query($param);
+    $url = 'http://xxx.com/login/autologin?'.http_build_query($param);
 
     return $url;
 
-
 }
 
-$getLoginUrl = getLoginUrl($uid, $appid, $temp, $appkey);
+$getLoginUrl = getLoginUrl($tamp,$uid,$realname,$appid, $scope, $sign, $return_url);
+
+echo $getLoginUrl;
 
 ?>
 
