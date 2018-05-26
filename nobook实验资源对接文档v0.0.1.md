@@ -206,8 +206,8 @@ const express = require('express');
 const app = express();
 const md5 = require('md5');
 
-const appid = '21412';
-const appkey = 'cf3105d92c67d288';
+const appid = '9999999';
+const appkey = '8fh37fghr5vhdow93uyghiods';
 
 // 获取实验列表
 app.get('/list', (req, res)=> {
