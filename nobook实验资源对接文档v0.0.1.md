@@ -226,7 +226,7 @@ app.get('/demo', (req, res)=> {
     const timestamp = Math.round(new Date().getTime() / 1000);
     const uid = '10000';
     const sign = md5(`${appid}${appkey}${subject}${timestamp}${uid}`);
-    res.redirect(`https://res-api.nobook.com/api/login/autologin?appid=${appid}&subject=${subject}&timestamp=${timestamp}&sign=${sign}&redirect=${redirect}`);
+    res.redirect(`https://res-api.nobook.com/api/login/autologin?appid=${appid}&uid=${uid}&subject=${subject}&timestamp=${timestamp}&sign=${sign}&redirect=${redirect}`);
 });
 
 app.listen(8080);
