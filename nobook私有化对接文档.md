@@ -43,8 +43,8 @@
 | 实验平台首页    | http://ip     | 首页|
 | 物理实验页面 | http://ip/wuli | 物理实验地址|
 | 化学实验页面 | http://ip/huaxue | 化学实验地址|
-| 初中生物实验页面 | http://ip/shengwu_cz | 初中生物实验地址|
-| 高中生物实验页面 | http://ip/shengwu_gz | 高中生物实验地址|
+| 初中生物实验页面 | http://ip/shengwu | 初中生物实验地址|
+| 高中生物实验页面 | http://ip/shengwu/gz | 高中生物实验地址|
 | 小学科学实验页面 | http://ip/xiaoke | 小学科学实验地址|
 
 
