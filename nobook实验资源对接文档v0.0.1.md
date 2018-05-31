@@ -34,7 +34,7 @@
 | appid |必须 | str|  16   | 接口appid，应用的唯一标识|
 | timestamp|必须| str|255   |1970-01-01开始的时间戳，秒为单位|
 | redirect |必须 | str|  255  | 登录成功后的重定向地址,必须进行URL编码|
-| sign |必须 | str|  255   | MD5签名 (除redirect参数外将所有的参数值与appkey按参数名升序进行排列）
+| sign |必须 | str|  255   | MD5签名 MD5(appid appkey subject timestamp uid）
 |
 
 
@@ -70,9 +70,10 @@ appid appkey subject timestamp uid
 
 
 
-# 二、获取实验列表
+# 二、资源接口
 
 ------
+## 1. 获取资源
 ### 请求说明
 请求方式：get <br>
 编码说明：UTF-8 <br>
@@ -85,7 +86,7 @@ appid appkey subject timestamp uid
 | subject    | 必须     | str     | 32   | 学科标识（phy：物理；chem：化学；biocz：初中生物；biogz：高中生物；sci：小学科学）|
 | appid |必须 | str|  16   | 接口appid，应用的唯一标识|
 | timestamp|必须| str|255   |1970-01-01开始的时间戳，秒为单位|
-| sign |必须 | str|  255   | MD5签名（将所有的参数值与appkey按参数名升序进行排列）|
+| sign |必须 | str|  255   | MD5签名 MD5（appid appkey subject timestamp）|
 
 
 
@@ -107,17 +108,88 @@ appid appkey subject timestamp uid
     
 ```
 
-## 3、phpDemo
-```<?php
+## 2. 获取章节
+### 请求说明
+请求方式：get <br>
+编码说明：UTF-8 <br>
+请求URL：https://res-api.nobook.com/api/experiment/chapter?appid=123&subject=phy&timestamp=1501112321&sign=fdasfdDS93ASF8
 
+### 参数说明
+
+| 参数        | 是否必须   |  参数类型  | 限制长度 |参数说明|
+| --------    | :-----     | :----     | :----   | :----|
+| subject    | 必须     | str     | 32   | 学科标识（phy：物理；chem：化学；biocz：初中生物；biogz：高中生物；sci：小学科学）|
+| appid |必须 | str|  16   | 接口appid，应用的唯一标识|
+| timestamp|必须| str|255   |1970-01-01开始的时间戳，秒为单位|
+| sign |必须 | str|  255   | MD5签名 MD5（appid appkey subject timestamp）|
+
+
+
+## 响应说明
+
+失败 {code: 500, data: "", msg: "错误信息"}
+
+成功 {code: 200, data:_data,  msg: "ok"}
+
+###_data参数说明
+```json
+[
+    {
+        "iconPath":"实验缩略图",
+        "name": "实验名称",
+        "url": "实验访问地址"
+    },
+]    
+    
+```
+
+## 3. 资源类别
+### 请求说明
+请求方式：get <br>
+编码说明：UTF-8 <br>
+请求URL：https://res-api.nobook.com/api/experiment/classifications?appid=123&subject=phy&timestamp=1501112321&sign=fdasfdDS93ASF8
+
+### 参数说明
+
+| 参数        | 是否必须   |  参数类型  | 限制长度 |参数说明|
+| --------    | :-----     | :----     | :----   | :----|
+| subject    | 必须     | str     | 32   | 学科标识（phy：物理；chem：化学；biocz：初中生物；biogz：高中生物；sci：小学科学）|
+| appid |必须 | str|  16   | 接口appid，应用的唯一标识|
+| timestamp|必须| str|255   |1970-01-01开始的时间戳，秒为单位|
+| sign |必须 | str|  255   | MD5签名 MD5（appid appkey subject timestamp）|
+
+
+
+## 响应说明
+
+失败 {code: 500, data: "", msg: "错误信息"}
+
+成功 {code: 200, data:_data,  msg: "ok"}
+
+###_data参数说明
+```json
+[
+    {
+        "iconPath":"实验缩略图",
+        "name": "实验名称",
+        "url": "实验访问地址"
+    },
+]    
+    
+```
+
+### 4、phpDemo
+```
+<?php
 //配置参数
-$appid = '';
-$appkey = '';
+$appid = 'appid';
+$appkey = 'appkey';
 $subject = 'phy';
 $timestamp = time();
-$uid = '';
+$uid = '23513301';
 $redirect = urlencode('https://res-api.nobook.com/wuli/?sourceid=452385a5699233a32bc4c6b292800752');
 
+$url = 'https://res-api.nobook.com';
 
 function  sign($array)
 {
@@ -129,9 +201,8 @@ function  sign($array)
     return md5($string);
 }
 
-
 //获取实验列表URL
-function getListUrl($subject, $appid, $appkey, $timestamp)
+function getListUrl($subject, $appid, $appkey, $timestamp, $url)
 {
     $arr = [
         'subject'=> $subject,
@@ -145,17 +216,53 @@ function getListUrl($subject, $appid, $appkey, $timestamp)
         'timestamp'=> $timestamp,
         'subject'=> $subject,
         'appid'=> $appid,
+        'type'=> 'chapter',
+        'typename'=> '第十五章  电流和电路',
         'sign'=> $sign,
     ];
 
-    $url = 'https://res-api.nobook.com/api/experiment/get?'.http_build_query($param);
+    $url = $url.'/api/experiment/get?'.http_build_query($param);
 
     return $url;
 }
 
 
+//获取章节URL
+function getChapterUrl($subject, $appid, $appkey, $timestamp, $url)
+{
+    $param = [
+        'timestamp'=> $timestamp,
+        'subject'=> $subject,
+        'appid'=> $appid,
+        'sign'=> md5($appid.$appkey.$subject.$timestamp),
+    ];
+
+    $url = $url.'/api/experiment/chapter?'.http_build_query($param);
+
+    return $url;
+
+}
+
+
+//获取资源类别URL
+function getClassificationsUrl($subject, $appid, $appkey, $timestamp, $url)
+{
+    $param = [
+        'timestamp'=> $timestamp,
+        'subject'=> $subject,
+        'appid'=> $appid,
+        'sign'=> md5($appid.$appkey.$subject.$timestamp),
+    ];
+
+    $url = $url.'/api/experiment/classifications?'.http_build_query($param);
+
+    return $url;
+
+}
+
+
 //获取登录Url
-function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey)
+function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey, $url)
 {
     $arr = [
         'uid'=> $uid,
@@ -174,32 +281,42 @@ function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey)
         'redirect'=> 'https://res-api.nobook.com/wuli/?sourceid=452385a5699233a32bc4c6b292800752',
     ];
 
-    $url = 'https://res-api.nobook.com/api/login/autologin?'.http_build_query($param);
+    $url = $url.'/api/login/autologin?'.http_build_query($param);
 
     return $url;
 
 
 }
 
-$getListUrl = getListUrl($subject, $appid, $appkey, $timestamp);
+$getListUrl = getListUrl($subject, $appid, $appkey, $timestamp, $url);
+$getChapterUrl = getChapterUrl($subject, $appid, $appkey, $timestamp, $url);
+$getClassificationsUrl = getClassificationsUrl($subject, $appid, $appkey, $timestamp, $url);
 
-$getLoginUrl = getLoginUrl($uid, $subject, $appid, $timestamp, $appkey);
+$getLoginUrl = getLoginUrl($uid, $subject, $appid, $timestamp, $appkey, $url);
 
 ?>
 
 
 <h4>实验列表URl</h4>
-
-
 <p> <a target="_blank" href="<?=$getListUrl?>"><?=$getListUrl?></a> </p>
+
+<h4>实验章节URl</h4>
+<p> <a target="_blank" href="<?=$getChapterUrl?>"><?=$getChapterUrl?></a> </p>
+
+<h4>资源类别URl</h4>
+<p> <a target="_blank" href="<?=$getClassificationsUrl?>"><?=$getClassificationsUrl?></a> </p>
 
 <h4>登录URl</h4>
 
-
 <p> <a target="_blank" href="<?=$getLoginUrl?>"><?=$getLoginUrl?></a> </p>
+
+
+
+
+
 ```
 
-### 4. nodejs demo
+### 5. nodejs demo
 
 ```
 const express = require('express');
