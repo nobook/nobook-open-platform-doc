@@ -96,17 +96,6 @@ appid appkey subject timestamp uid
 
 成功 {code: 200, data:_data,  msg: "ok"}
 
-###_data参数说明
-```json
-[
-    {
-        "iconPath":"实验缩略图",
-        "name": "实验名称",
-        "url": "实验访问地址"
-    },
-]    
-    
-```
 
 ## 2. 获取章节
 ### 请求说明
@@ -131,17 +120,6 @@ appid appkey subject timestamp uid
 
 成功 {code: 200, data:_data,  msg: "ok"}
 
-###_data参数说明
-```json
-[
-    {
-        "iconPath":"实验缩略图",
-        "name": "实验名称",
-        "url": "实验访问地址"
-    },
-]    
-    
-```
 
 ## 3. 资源类别
 ### 请求说明
@@ -153,7 +131,7 @@ appid appkey subject timestamp uid
 
 | 参数        | 是否必须   |  参数类型  | 限制长度 |参数说明|
 | --------    | :-----     | :----     | :----   | :----|
-| subject    | 必须     | str     | 32   | 学科标识（phy：物理；chem：化学；biocz：初中生物；biogz：高中生物；sci：小学科学）|
+| subject    | 必须     | str     | 32   | 学科标识【phy】|
 | appid |必须 | str|  16   | 接口appid，应用的唯一标识|
 | timestamp|必须| str|255   |1970-01-01开始的时间戳，秒为单位|
 | sign |必须 | str|  255   | MD5签名 MD5（appid appkey subject timestamp）|
@@ -166,17 +144,6 @@ appid appkey subject timestamp uid
 
 成功 {code: 200, data:_data,  msg: "ok"}
 
-###_data参数说明
-```json
-[
-    {
-        "iconPath":"实验缩略图",
-        "name": "实验名称",
-        "url": "实验访问地址"
-    },
-]    
-    
-```
 
 ### 4、phpDemo
 ```
