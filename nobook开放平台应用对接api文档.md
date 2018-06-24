@@ -172,7 +172,8 @@ if (returnURL) {
 console.log(URL);
 ```
 
-视频 DEMO
+## 视频 DEMO
+
 https://downloadcdn.oss-cn-qingdao.aliyuncs.com/video/NOBOOK_VIDEO/open.mp4
 
 ### OAuth2.0协议登录
