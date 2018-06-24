@@ -78,7 +78,7 @@ return_url:https://nobook.com <br>
 
 
 2. 参数进行升序排列后生成的签名原串：
-appid appkey timestamp uid
+appid appkey temp uid
 3. 签名后字符串 : 520aed5635dca93d250b809a26840a98
 
 4. 签名url ：https://{appname}-lab.nobook.com/withoutpwd/autologin?appid=appid&uid=uid&temp=temp&code= 520aed5635dca93d250b809a26840a98&return_url=https%3a%2f%2fwww.nobook.com%2f
