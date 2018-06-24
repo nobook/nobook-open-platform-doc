@@ -47,10 +47,10 @@ NOBOOK虚拟实验免登录url经过签名，该url地址1分钟失效，请务�
 | uid    | 必须     | str     | 32   | 用户唯一性标识，对应唯一一个用户且不可变|
 | appid |必须 | str|  16   | 接口appid，应用的唯一标识|
 | temp |必须| str|255   |1970-01-01开始的时间戳，秒为单位|
-| redirect |必须 | str|  255  | 登录成功后的重定向地址,必须进行URL编码|
-| code |必须 | str|  255   | MD5签名 (除redirect参数外将所有的参数值与appkey按参数名升序进行排列）
+| return_url |必须 | str|  255  | 登录成功后的重定向地址,必须进行URL编码|
+| code |必须 | str|  255   | MD5签名 (除return_url参数外将所有的参数值与appkey按参数名升序进行排列）
 
-### redirect 跳转产品页面汇总
+### return_url 跳转产品页面汇总
 
 | 页面       | 地址   |  说明 |
 | --------    | :-----     |  :-----     | 
@@ -74,14 +74,14 @@ uid：uid <br>
 appid：appid <br>
 temp: temp <br>
 appkey:appkey <br>
-redirect:https://nobook.com <br>
+return_url:https://nobook.com <br>
 
 
 2. 参数进行升序排列后生成的签名原串：
 appid appkey timestamp uid
 3. 签名后字符串 : 520aed5635dca93d250b809a26840a98
 
-4. 签名url ：https://{appname}-lab.nobook.com/withoutpwd/autologin?appid=appid&uid=uid&temp=temp&code= 520aed5635dca93d250b809a26840a98&redirect=https%3a%2f%2fwww.nobook.com%2f
+4. 签名url ：https://{appname}-lab.nobook.com/withoutpwd/autologin?appid=appid&uid=uid&temp=temp&code= 520aed5635dca93d250b809a26840a98&return_url=https%3a%2f%2fwww.nobook.com%2f
 
 #### 响应说明
 失败
@@ -89,7 +89,7 @@ appid appkey timestamp uid
 成功
 免密登录成功
 如果有回调地址跳到回调地址
-return redirect($return_url);
+return return_url($return_url);
 如果没有回调地址直接进入实验平台首页
 ### 代码示例php
 ```<?php
@@ -99,7 +99,7 @@ $appid = '';
 $appkey = '';
 $temp = time();
 $uid = '';
-$redirect = urlencode('https://{appname}-lab.nobook.com/go/1');
+$return_url = urlencode('https://{appname}-lab.nobook.com/go/1');
 
 
 function  sign($array)
@@ -127,7 +127,7 @@ function getLoginUrl($uid, $appid, $temp, $appkey)
         'uid'=> $uid,
         'appid'=> $appid,
         'code'=> $sign,
-        'redirect'=> 'https://{appname}nobook.com/go/1',
+        'return_url'=> 'https://{appname}nobook.com/go/1',
     ];
 
     $url = 'https://{appname}-lab.nobook.com/withoutpwd/autologin?'.http_build_query($param);
