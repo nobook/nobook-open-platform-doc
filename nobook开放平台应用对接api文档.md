@@ -172,6 +172,9 @@ if (returnURL) {
 console.log(URL);
 ```
 
+视频 DEMO
+https://downloadcdn.oss-cn-qingdao.aliyuncs.com/video/NOBOOK_VIDEO/open.mp4
+
 ### OAuth2.0协议登录
 #### OAuth2.0概述
 OAuth2.0较1.0相比，整个授权验证流程更简单更安全，也是未来最主要的用户身份验证和授权方式。
