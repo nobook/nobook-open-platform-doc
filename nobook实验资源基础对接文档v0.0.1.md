@@ -82,7 +82,7 @@ $appkey = 'appkey';
 $subject = 'phy';
 $timestamp = time();
 $uid = '23513301';
-$redirect = urlencode('https://school.nobook.com/xx');
+$redirect = 'https://school.nobook.com/xx';
 
 $url = 'https://res-api.nobook.com';
 
@@ -98,7 +98,7 @@ function  sign($array)
 
 
 //获取免密登录Url
-function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey, $url)
+function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey, $url,$redirect)
 {
     $arr = [
         'uid'=> $uid,
@@ -125,7 +125,7 @@ function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey, $url)
 }
 
 
-$getLoginUrl = getLoginUrl($uid, $subject, $appid, $timestamp, $appkey, $url);
+$getLoginUrl = getLoginUrl($uid, $subject, $appid, $timestamp, $appkey, $url,$redirect);
 
 //跳转到独立实验平台
 header("location:".$getLoginUrl."");
