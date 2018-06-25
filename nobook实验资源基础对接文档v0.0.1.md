@@ -4,7 +4,7 @@
 
 ## 1、接口定义
 
-* NOBOOK将为用户独立生成资源平台，参考示例：https://school.nobook.com/nb  其中nb为应用名称，NOBOOK将为每个客户生成独立的应用名称。NOBOOK提供的对接参数包含：appid:应用id、appkey:应用密钥、appname:应用英文名称、appurl:独立平台地址。
+* NOBOOK将为用户独立生成资源平台，参考示例：https://school.nobook.com/xx  其中nb为应用名称，NOBOOK将为每个客户生成独立的应用名称。NOBOOK提供的对接参数包含：appid:应用id、appkey:应用密钥、appname:应用英文名称、appurl:独立平台地址。
 
 * 主要是为第三方用户对接使用 用户登录NOBOOK虚拟实验平台，需要开发者根据用户信息在服务端生成一个免登录url，通过这个url链接，NOBOOK才能知道是哪个用户来访问。 为了确保客户端每次请求到都是最新的免登陆url，客户端每次向服务器发的请求不能是固定的，以避免请求被缓存。 NOBOOK虚拟实验免登录url经过签名，该url地址5分钟失效，请务必在生成地址后立即使用，使用后页面会重定向进入NOBOOK。
 * 免密后的跳转地址为
@@ -54,14 +54,14 @@ appid：appid <br>
 timestamp:timestamp <br>
 appkey:appkey <br>
 subject:phy <br>
-redirect:https://school.nobook.com/nb (默认为独立平台首页 appurl ，由NOBOOK提供) <br>
+redirect:https://school.nobook.com/xx (默认为独立平台首页 appurl ，由NOBOOK提供) <br>
 
 
 2. 参数进行升序排列后生成的签名原串：
 appid appkey subject timestamp uid
 3. 签名后字符串 : 520aed5635dca93d250b809a26840a98
 
-4. 签名url ：https://res-api.nobook.com/api/login/autologin?subject=phy&appid=appid&uid=uid&timestamp=timestamp&sign=520aed5635dca93d250b809a26840a98&redirect=https%3a%2f%2fwww.nobook.com%2f
+4. 签名url ：https://res-api.nobook.com/api/login/autologin?subject=phy&appid=appid&uid=uid&timestamp=timestamp&sign=520aed5635dca93d250b809a26840a98&redirect=https%3a%2f%2fschool.nobook.com%2f
 
 ---
 
