@@ -114,7 +114,7 @@ function getLoginUrl($uid, $subject, $appid, $timestamp, $appkey, $url)
         'subject'=> $subject,
         'appid'=> $appid,
         'sign'=> $sign,
-        'redirect'=> 'https://res-api.nobook.com/wuli/?sourceid=452385a5699233a32bc4c6b292800752',
+        'redirect'=> $redirect
     ];
 
     $url = $url.'/api/login/autologin?'.http_build_query($param);
