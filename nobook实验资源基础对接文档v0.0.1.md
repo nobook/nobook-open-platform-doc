@@ -166,7 +166,7 @@ app.listen(8080);
 ```
 
 ### 5. 视频demo
-暂无
+https://downloadcdn.oss-cn-qingdao.aliyuncs.com/video/NOBOOK_VIDEO/open-simple.mp4
 
 
 
